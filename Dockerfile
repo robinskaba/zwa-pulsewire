@@ -8,3 +8,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd
 
 RUN a2enmod rewrite
+
+COPY . /var/www/html/
+
+# change ownership to www-data
+RUN chown -R www-data:www-data /var/www/html
+
+# permission 755
+RUN chmod -R 755 /var/www/html
